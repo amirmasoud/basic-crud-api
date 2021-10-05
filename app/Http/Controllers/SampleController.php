@@ -2,84 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrUpdateSampleRequest;
+use App\Http\Resources\SampleCollection;
+use App\Http\Resources\SampleResouce;
 use App\Models\Sample;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SampleController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\SampleCollection
      */
-    public function index()
+    public function index(): SampleCollection
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return new SampleCollection(Sample::all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreOrUpdateSampleRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOrUpdateSampleRequest $request): Response
     {
-        //
+        return Sample::create($request->validated());
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Sample  $sample
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\SampleResouce
      */
-    public function show(Sample $sample)
+    public function show(Sample $sample): SampleResouce
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Sample  $sample
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Sample $sample)
-    {
-        //
+        return new SampleResouce($sample);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreOrUpdateSampleRequest  $request
      * @param  \App\Models\Sample  $sample
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\SampleResouce
      */
-    public function update(Request $request, Sample $sample)
+    public function update(StoreOrUpdateSampleRequest $request, Sample $sample): SampleResouce
     {
-        //
-    }
+        $sample->update($request->validated());
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Sample  $sample
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Sample $sample)
-    {
-        //
+        return new SampleResouce($sample);
     }
 }
