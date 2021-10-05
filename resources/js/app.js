@@ -1,12 +1,17 @@
 require('./bootstrap');
 
 import Vue from 'vue';
+
 import BasicNavbar from './components/Navbar';
-import BasicMain from './components/Main';
+import BasicCard from './components/Card';
+
+import BasicSampleIndex from './components/samples/Index';
 
 Vue.component('basic-navbar', BasicNavbar);
-Vue.component('basic-main', BasicMain);
+Vue.component('basic-card', BasicCard);
 
-var app = new Vue({
+Vue.component('basic-sample-index', BasicSampleIndex);
+
+new Vue({
     el: '#app',
-})
+});
