@@ -16,7 +16,8 @@
         <div id="app">
             <basic-navbar></basic-navbar>
 
-            <main class="container mt-4">
+            <br />
+            <main class="container mt-5">
                 <basic-sample-index></basic-sample-index>
             </main>
         </div>

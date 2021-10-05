@@ -1,14 +1,16 @@
 <template>
-    <div class="bg-light p-5 rounded mt-4">
-        <h1>{{ title }}</h1>
-        <p class="lead">{{ description }}</p>
-        <div>
-            <pre>
-                <code>{{ code }}</code>
-            </pre>
-        </div>
-        <p>{{ status }}</p>
-    </div>
+    <b-card
+        header="title"
+        header-tag="header"
+        :footer="status"
+        footer-tag="footer"
+        :title="title"
+    >
+        <b-card-text>{{ description }}</b-card-text>
+        <pre>
+            <code>{{ code }}</code>
+        </pre>
+    </b-card>
 </template>
 
 <script>
