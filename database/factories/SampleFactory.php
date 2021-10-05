@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\StatusEnum;
 use App\Models\Sample;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,11 +23,10 @@ class SampleFactory extends Factory
     public function definition()
     {
         return [
-            'uuid' => $this->faker->uuid,
             'name' => $this->faker->words(5),
             'description' => $this->faker->paragraphs(5),
             'code' => $this->faker->paragraphs(10),
-//            'status' => collect()
+            'status' => collect(StatusEnum::toValues())->random(),
         ];
     }
 }
