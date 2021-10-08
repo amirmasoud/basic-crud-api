@@ -16,7 +16,7 @@ import axios from 'axios'
 
 export default {
     name: "BasicSampleIndex",
-    data: function () {
+    data() {
         return {
             samples: []
         }

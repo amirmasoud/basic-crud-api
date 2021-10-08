@@ -19,7 +19,7 @@ class Sample extends Model
     ];
 
     protected $casts = [
-        'status' => StatusEnum::class,
+        'status' => StatusEnum::class . ':nullable',
     ];
 
 
@@ -28,7 +28,7 @@ class Sample extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->uuid = Str::uuid();
+            $model->id = Str::uuid();
         });
     }
 }

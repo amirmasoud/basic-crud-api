@@ -25,11 +25,13 @@ class SampleController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreOrUpdateSampleRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return string[]
      */
-    public function store(StoreOrUpdateSampleRequest $request): Response
+    public function store(StoreOrUpdateSampleRequest $request)
     {
-        return Sample::create($request->validated());
+        Sample::create($request->validated());
+
+        return ['message' => 'created'];
     }
 
     /**

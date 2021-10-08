@@ -13,7 +13,7 @@ class StoreOrUpdateSampleRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,5 +29,17 @@ class StoreOrUpdateSampleRequest extends FormRequest
             'code' => 'required',
             'status' => 'required',
         ];
+    }
+
+    /**
+     * @link https://github.com/spatie/laravel-enum/issues/57
+     */
+    public function validationData()
+    {
+        $this->merge([
+            'status'=> $this->status,
+        ]);
+
+        return $this->all();
     }
 }
