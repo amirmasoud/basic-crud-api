@@ -77,9 +77,6 @@ export default {
                     this.$bvModal.hide(`edit-sample-form-${this.sample}`)
                 })
                 .catch(error => {
-                    // handle authentication and validation errors here
-                    // this.errors = error.response.data.errors
-                    // this.isLoading = false
                 })
         },
         loadEditFormContent() {
@@ -92,7 +89,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

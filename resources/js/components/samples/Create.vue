@@ -75,15 +75,8 @@ export default {
                     this.$bvModal.hide('create-sample-form')
                 })
                 .catch(error => {
-                    // handle authentication and validation errors here
-                    // this.errors = error.response.data.errors
-                    // this.isLoading = false
                 })
         },
     }
 }
 </script>
-
-<style scoped>
-
-</style>
