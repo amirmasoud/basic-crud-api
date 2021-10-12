@@ -23,9 +23,9 @@ class SampleFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->words(5),
-            'description' => $this->faker->paragraphs(5),
-            'code' => $this->faker->paragraphs(10),
+            'name' => $this->faker->word,
+            'description' => $this->faker->word,
+            'code' => $this->faker->word,
             'status' => collect(StatusEnum::toValues())->random(),
         ];
     }
