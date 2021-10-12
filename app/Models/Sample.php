@@ -19,6 +19,7 @@ class Sample extends Model
     ];
 
     protected $casts = [
+        'id' => 'string',
         'status' => StatusEnum::class . ':nullable',
     ];
 

@@ -1,12 +1,13 @@
 <template>
     <div>
-        <b-button id="show-btn" @click="$bvModal.show('create-sample-form')">Create new sample</b-button>
+        <b-button id="show-btn" @click="$bvModal.show(`edit-sample-form-${sample}`)">Edit sample</b-button>
 
-        <b-modal id="create-sample-form" hide-footer>
+        <b-modal :id="`edit-sample-form-${sample}`" hide-footer @shown="loadEditFormContent">
             <template #modal-title>
-                Create new sample
+                Edit sample
             </template>
-            <b-form @submit="onSubmit">
+            <div v-if="loading">Loading...</div>
+            <b-form @submit="onSubmit" v-else>
                 <b-form-group id="name" label="Name:" label-for="name">
                     <b-form-input
                         id="name"
@@ -47,14 +48,14 @@
                     <b-button type="submit" variant="primary">Submit</b-button>
                 </div>
             </b-form>
-<!--            <b-button class="mt-3" block @click="$bvModal.hide('create-sample-form')">Close Me</b-button>-->
         </b-modal>
     </div>
 </template>
 
 <script>
 export default {
-    name: "BasicSampleCreate",
+    name: "BasicSampleEdit",
+    props: ['sample', 'lazy'],
     data() {
         return {
             form: {
@@ -64,20 +65,28 @@ export default {
                 status: 1,
             },
             statuses: [{ text: 'Active', value: 'active' }, { text: 'Inactive', value: 'inactive' }],
+            loading: true
         }
     },
     methods: {
         onSubmit(event) {
             event.preventDefault()
-            axios.post('/api/sample', this.form)
+            axios.put(`/api/sample/${this.sample}`, this.form)
                 .then(response => {
-                    this.$root.$emit('stored', response.data.data)
-                    this.$bvModal.hide('create-sample-form')
+                    this.$emit('updated', response.data.data)
+                    this.$bvModal.hide(`edit-sample-form-${this.sample}`)
                 })
                 .catch(error => {
                     // handle authentication and validation errors here
                     // this.errors = error.response.data.errors
                     // this.isLoading = false
+                })
+        },
+        loadEditFormContent() {
+            axios.get(`/api/sample/${this.sample}`)
+                .then(response => {
+                    this.form = response.data.data
+                    this.loading = false
                 })
         },
     }

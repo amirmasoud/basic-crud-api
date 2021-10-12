@@ -18,7 +18,7 @@ class SampleController extends Controller
      */
     public function index(): SampleCollection
     {
-        return new SampleCollection(Sample::all());
+        return new SampleCollection(Sample::orderByDesc('created_at')->get());
     }
 
     /**
